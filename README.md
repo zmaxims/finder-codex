@@ -1,98 +1,106 @@
 # Open in Codex — Finder Quick Action
 
-Открывай Codex CLI в выбранной папке через контекстное меню Finder.
-Действие запускает новое окно **iTerm2**, переходит в папку и запускает Codex.
+Launch Codex CLI in a selected folder directly from Finder. The Quick Action
+opens a new **iTerm2** window, changes to the folder, and starts Codex.
 
-**Правый клик → Быстрые действия / Quick Actions → Открыть в Codex**
+**Right-click → Quick Actions → Open in Codex**
 
-- Для выбранного файла открывается его родительская папка.
-- При выборе нескольких объектов каждая уникальная папка открывается один раз.
-- У действия есть цветной значок Codex, включая поддержку Retina.
-- Установленное действие работает независимо от папки с исходниками.
+- Select a file to open its parent folder.
+- Select multiple items to open each unique folder once.
+- Includes a full-color Codex icon with Retina support.
+- Once installed, the action works independently of the source folder.
 
-## Требования
+## Requirements
 
-- macOS с Finder и Automator. Работа и отображение иконки подтверждены пользователем на macOS 27.0.1; другие версии не проверены.
-- [iTerm2](https://iterm2.com/), установленный под именем `iTerm`.
-- Codex CLI по пути `/opt/homebrew/bin/codex`.
-- Python 3 — только для сборки из исходников.
+- macOS with Finder and Automator. The original action and icon were confirmed working on macOS 27.0.1; other versions have not been tested.
+- [iTerm2](https://iterm2.com/), installed as `iTerm`.
+- Codex CLI at `/opt/homebrew/bin/codex`.
+- Python 3, only when building from source.
 
-Если Codex установлен в другом месте, перед сборкой замени
-`/opt/homebrew/bin/codex` в `open-in-codex.zsh` на абсолютный путь к своему исполняемому файлу.
+If Codex is installed elsewhere, replace `/opt/homebrew/bin/codex` in
+`open-in-codex.zsh` with the absolute path to your executable before building.
 
-## Установка
+## Installation
 
-### Из готового ZIP
+### From a release
 
-1. Скачай `open-in-codex.zip` из раздела **Releases** этого репозитория, если релиз опубликован.
-2. Распакуй архив стандартной «Утилитой архивирования» macOS.
-3. Открой `Открыть в Codex.workflow` двойным кликом в Finder и установи действие.
-4. Выбери папку в Finder и вызови действие из меню **Quick Actions**.
+1. Download `open-in-codex.zip` from [Releases](https://github.com/zmaxims/finder-codex/releases).
+2. Extract it using macOS Archive Utility.
+3. Double-click `Open in Codex.workflow` in Finder to install it.
+4. Select a folder and choose **Quick Actions → Open in Codex**.
 
-При первом запуске macOS может запросить разрешение на управление iTerm.
-Оно нужно, чтобы создать окно и отправить команду запуска.
+Version 1.4.0 uses the original Russian name, `Открыть в Codex.workflow`.
+The English name is available in builds from version 1.4.1 onward.
 
-### Из исходников
+On first launch, macOS may ask for permission to control iTerm. This allows
+the action to create a terminal window and send the launch command.
 
-Скачай исходники, открой папку проекта в терминале и выполни:
+### From source
+
+Download or clone this repository, open its folder in a terminal, and run:
 
 ```sh
 python3 build.py
 ```
 
-Открой созданный `Открыть в Codex.workflow` двойным кликом в Finder.
-После изменения скрипта или иконок повтори сборку и установку.
+Double-click the generated `Open in Codex.workflow` in Finder.
+Rebuild and reinstall after changing the script or icons.
 
-## Как это работает
+### Upgrading from the Russian action
 
-Finder передаёт выбранные пути быстрому действию Automator. Встроенный shell-скрипт
-определяет папки, убирает повторы и через AppleScript создаёт отдельное окно iTerm
-для каждой папки. В нём выполняется `cd` и запускается Codex CLI.
-Пути экранируются для shell, поэтому пробелы и апострофы в именах поддерживаются.
+Install `Open in Codex.workflow`, then move the old
+`~/Library/Services/Открыть в Codex.workflow` to the Bin to avoid duplicate menu items.
 
-Пункт рассчитан на выбранные файлы и папки. Чтобы запустить Codex в папке,
-которую сейчас просматриваешь, перейди на уровень выше и выбери её.
-В меню пустого места Finder пункт может отсутствовать.
+## How it works
 
-## Если пункт или значок не появился
+Finder passes the selected paths to an Automator Quick Action. Its embedded
+shell script resolves the folders, removes duplicates, and uses AppleScript to
+create a separate iTerm window for each folder. Each window runs `cd` followed
+by Codex CLI. Paths are shell-quoted to support spaces and apostrophes.
 
-- Проверь, что пакет установлен в `~/Library/Services/Открыть в Codex.workflow`.
-- В меню **Quick Actions → Customise…** проверь, что действие включено.
-- Если Finder показывает прежнюю иконку, перезапусти Finder и открой меню заново.
-- Если iTerm открывается, но Codex не запускается, проверь путь к CLI в исходном скрипте.
+The action expects selected files or folders. To launch Codex in the folder
+you are currently viewing, go up one level and select that folder. The action
+may not appear when right-clicking empty space in Finder.
 
-Для меню используется `workflowCustomImage.tiff` с несколькими размерами.
-Значок самого файла workflow хранится отдельно в resource fork. Git и обычная
-упаковка ZIP не сохраняют эти метаданные: для распространения используй архив сборщика.
+## Troubleshooting
 
-## Сборка релиза
+- Check that the workflow is installed at `~/Library/Services/Open in Codex.workflow`.
+- In **Quick Actions → Customise…**, make sure the action is enabled.
+- If Finder shows an old icon, relaunch Finder and open the menu again.
+- If iTerm opens but Codex does not start, check the CLI path in the source script.
+
+The menu uses a multi-resolution `workflowCustomImage.tiff`. The workflow file
+has a separate Finder icon stored in a resource fork. Git and ordinary ZIP
+packaging do not preserve that metadata; use the builder's release archive.
+
+## Building a release
 
 ```sh
 python3 build.py --archive
 ```
 
-Результат: `dist/open-in-codex.zip`. Сборщик использует системный `ditto`,
-чтобы сохранить иконку Finder и метаданные macOS. Загрузи этот ZIP в GitHub Release.
-Автоматический архив исходников GitHub предназначен для самостоятельной сборки.
+Output: `dist/open-in-codex.zip`. The builder uses the system `ditto` utility to
+preserve the Finder icon and macOS metadata. Upload this ZIP to a GitHub Release.
+GitHub's automatic source archives are intended for building from source.
 
-## Файлы проекта
+## Project files
 
-| Файл | Назначение |
+| File | Purpose |
 | --- | --- |
-| `open-in-codex.zsh` | Единственный исходник скрипта запуска |
-| `build.py` | Сборка workflow и архива релиза |
-| `assets/codex.png` | Исходное изображение значка |
-| `assets/codex.tiff` | Изображение для меню в нескольких разрешениях |
-| `assets/finder-icon.resourcefork` | Иконка файла workflow |
-| `CHANGELOG.md` | История изменений |
+| `open-in-codex.zsh` | Single source of the launch script |
+| `build.py` | Builds the workflow and release archive |
+| `assets/codex.png` | Original icon image |
+| `assets/codex.tiff` | Multi-resolution menu image |
+| `assets/finder-icon.resourcefork` | Finder workflow file icon |
+| `CHANGELOG.md` | Release history |
 
-## Удаление
+## Uninstalling
 
-В Finder открой **Go → Go to Folder…**, введи `~/Library/Services`
-и перемести `Открыть в Codex.workflow` в корзину.
+In Finder, choose **Go → Go to Folder…**, enter `~/Library/Services`,
+and move `Open in Codex.workflow` to the Bin.
 
-## Лицензия
+## License
 
-Исходный код и документация — [MIT](LICENSE).
-Логотипы исключены из этой лицензии: см. [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-Проект независимый и не является официальным продуктом OpenAI.
+Original source code and documentation are licensed under [MIT](LICENSE).
+Logos are excluded; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+This is an independent project, not an official OpenAI product.

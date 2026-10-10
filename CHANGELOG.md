@@ -1,13 +1,19 @@
 # Changelog
 
+## 1.4.1
+
+- Rename the Finder Quick Action and workflow bundle to **Open in Codex**.
+- Translate the README and changelog into English.
+- Document migration from the original Russian action.
+
 ## 1.4.0
 
-- Finder Quick Action «Открыть в Codex» для файлов и папок.
-- Запуск Codex CLI в новом окне iTerm2 для каждой уникальной папки.
-- Цветная иконка Codex для меню и самого workflow.
-- Сборка ZIP с сохранением resource forks и метаданных Finder.
+- Add a Finder Quick Action for selected files and folders.
+- Launch Codex CLI in a new iTerm2 window for each unique folder.
+- Include a full-color Codex icon for the menu and workflow file.
+- Build a ZIP that preserves resource forks and Finder metadata.
 
-## До публикации
+## Before publication
 
-Локальный прототип: запуск через Terminal, затем переход на iTerm2
-и размещение действия в разделе Quick Actions.
+Local prototype: launched through Terminal, then switched to iTerm2 and
+moved the action to Finder's Quick Actions menu.
