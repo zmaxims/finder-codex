@@ -1,9 +1,9 @@
-# Open in Codex — Finder Quick Action
+# Codex — Open Here — Finder Quick Action
 
 Launch Codex CLI in a selected folder directly from Finder. The Quick Action
 opens a new **iTerm2** window, changes to the folder, and starts Codex.
 
-**Right-click → Quick Actions → Open in Codex**
+**Right-click → Quick Actions → Codex — Open Here**
 
 - Select a file to open its parent folder.
 - Select multiple items to open each unique folder once.
@@ -26,11 +26,11 @@ If Codex is installed elsewhere, replace `/opt/homebrew/bin/codex` in
 
 1. Download `open-in-codex.zip` from [Releases](https://github.com/zmaxims/finder-codex/releases).
 2. Extract it using macOS Archive Utility.
-3. Double-click `Open in Codex.workflow` in Finder to install it.
-4. Select a folder and choose **Quick Actions → Open in Codex**.
+3. Double-click `Codex — Open Here.workflow` in Finder to install it.
+4. Select a folder and choose **Quick Actions → Codex — Open Here**.
 
 Version 1.4.0 uses the original Russian name, `Открыть в Codex.workflow`.
-The English name is available in builds from version 1.4.1 onward.
+Version 1.4.1 uses `Open in Codex.workflow`; version 1.4.2 uses `Codex — Open Here.workflow`.
 
 On first launch, macOS may ask for permission to control iTerm. This allows
 the action to create a terminal window and send the launch command.
@@ -43,13 +43,14 @@ Download or clone this repository, open its folder in a terminal, and run:
 python3 build.py
 ```
 
-Double-click the generated `Open in Codex.workflow` in Finder.
+Double-click the generated `Codex — Open Here.workflow` in Finder.
 Rebuild and reinstall after changing the script or icons.
 
-### Upgrading from the Russian action
+### Upgrading from an earlier action
 
-Install `Open in Codex.workflow`, then move the old
-`~/Library/Services/Открыть в Codex.workflow` to the Bin to avoid duplicate menu items.
+Install `Codex — Open Here.workflow`, then move the old
+`~/Library/Services/Открыть в Codex.workflow` or
+`~/Library/Services/Open in Codex.workflow` to the Bin to avoid duplicate menu items.
 
 ## How it works
 
@@ -64,7 +65,7 @@ may not appear when right-clicking empty space in Finder.
 
 ## Troubleshooting
 
-- Check that the workflow is installed at `~/Library/Services/Open in Codex.workflow`.
+- Check that the workflow is installed at `~/Library/Services/Codex — Open Here.workflow`.
 - In **Quick Actions → Customise…**, make sure the action is enabled.
 - If Finder shows an old icon, relaunch Finder and open the menu again.
 - If iTerm opens but Codex does not start, check the CLI path in the source script.
@@ -97,7 +98,7 @@ GitHub's automatic source archives are intended for building from source.
 ## Uninstalling
 
 In Finder, choose **Go → Go to Folder…**, enter `~/Library/Services`,
-and move `Open in Codex.workflow` to the Bin.
+and move `Codex — Open Here.workflow` to the Bin.
 
 ## License
 

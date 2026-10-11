@@ -15,12 +15,12 @@ parser.add_argument('--archive', action='store_true', help='Create dist/open-in-
 args = parser.parse_args()
 if sys.platform != 'darwin':
     parser.error('Building the workflow requires macOS.')
-name = 'Open in Codex'
+name = 'Codex — Open Here'
 script = (root / 'open-in-codex.zsh').read_text()
 info = {
     'CFBundleIdentifier': 'local.finder.open-in-codex',
     'CFBundleName': name,
-    'CFBundleVersion': '1.4.1',
+    'CFBundleVersion': '1.4.2',
     'NSServices': [{
         'NSMenuItem': {'default': name},
         'NSIconName': 'workflowCustomImage',

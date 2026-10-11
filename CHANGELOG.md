@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.4.2
+
+- Rename the Finder action and workflow bundle to **Codex — Open Here** so it sorts higher in Services.
+- Preserve the existing Quick Action and Finder file icons.
+
 ## 1.4.1
 
 - Rename the Finder Quick Action and workflow bundle to **Open in Codex**.
